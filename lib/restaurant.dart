@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:project_gsg_first/widget/campaigns_widget.dart';
 import 'package:project_gsg_first/widget/categoriers_widget.dart';
+import 'package:project_gsg_first/widget/indecator.dart';
 import 'package:project_gsg_first/widget/popular_restaurant_widget.dart';
-
 
 class RestaurantScreen extends StatefulWidget {
   const RestaurantScreen({Key? key}) : super(key: key);
@@ -14,6 +14,8 @@ class RestaurantScreen extends StatefulWidget {
 }
 
 class _RestaurantScreenState extends State<RestaurantScreen> {
+  int _currentPage = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,6 +43,50 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                 ),
               ),
             ),
+            SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              height: 200,
+              child: PageView(
+                scrollDirection: Axis.horizontal,
+                onPageChanged: (int value) {
+                  setState(() {
+                    _currentPage = value;
+                  });
+                },
+                children: [
+                  Container(
+                    clipBehavior: Clip.antiAlias,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Image(
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                      image: AssetImage("image/imge1.png"),
+                    ),
+                  ),
+                  Image(
+                    image: AssetImage("image/imge1.png"),
+                  ),
+                  Image(
+                    image: AssetImage("image/imge1.png"),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Indecator(selected: _currentPage == 0),
+                Indecator(selected: _currentPage == 1),
+                Indecator(selected: _currentPage == 2),
+              ],
+            ),
             Row(
               children: [
                 Text(
@@ -64,7 +110,6 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                 ),
               ],
             ),
-
             SizedBox(
               height: 100,
               child: ListView(
